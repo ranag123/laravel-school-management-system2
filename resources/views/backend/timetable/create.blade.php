@@ -6,7 +6,7 @@
             <div>
                 <h2 class="text-gray-700 uppercase font-bold">Add Voucher</h2>
             </div>
-asda fsd fadsf asd fadsf sadf adf
+asda fsd fadsf as
          </div>
         <div class="table w-full mt-8 bg-white rounded">
             <form action="{{route('voucher.voucheraddrequest')}}" method="POST" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
