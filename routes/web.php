@@ -56,9 +56,20 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::get('voucher/edit/{id}', 'VoucherController@edit')->name('voucher.edit');
     Route::post('voucher/voucherupdaterequest', 'VoucherController@voucherupdaterequest')->name('voucher.voucherupdaterequest');
 
+    Route::post('getteacher', 'TimetableController@getteacher');
+
+    Route::get('timetable', 'TimetableController@index')->name('timetable.index');
+    Route::get('timetable/create', 'TimetableController@create')->name( 'timetable.create');
+    Route::post('timetableaddrequest', 'TimetableController@timetableaddrequest')->name( 'timetable.timetableaddrequest');
+     Route::get('timetable/destroy/{id}', 'VoucherController@destroy')->name('timetable.destroy');
+    Route::get('timetable/edit/{id}', 'VoucherController@edit')->name('timetable.edit');
+    Route::post('timetable/voucherupdaterequest', 'VoucherController@voucherupdaterequest')->name('timetable.voucherupdaterequest');
+
 });
 Route::get('voucher', 'VoucherController@index')->name('voucher.index');
 Route::get('voucher/view/{id}', 'VoucherController@view')->name('voucher.view');
+
+Route::get('timetable/view/{id}', 'TimetableController@view')->name('timetable.view');
 
 Route::group(['middleware' => ['auth','role:Teacher']], function ()
 {

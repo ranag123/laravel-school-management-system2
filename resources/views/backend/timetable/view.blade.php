@@ -1,64 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
+<style>
+    nav {
+          background-color: #f2f4f6;
+          display: flex;
+          }
 
-hr {
-    border: 1px solid grey;border-bottom: none;
-    box-sizing: content-box;
-    height: 0px;
-    overflow: visible;
-    width: 100%;
-    margin: 20px;
-}  p{
-       font-size: 12px !important;
-    line-height: 1.5;
-   }
-@page {
-    /*size: A4;*/
+          .nav-link {
+          flex: 1;
+          text-align: center;
+          text-decoration: none;
+          padding: .5rem;
+          border-bottom: 2px solid transparent;
+          }
 
-    background: darkcyan;
-    size: landscape;
-    margin: 0px;
- }
-.tracking-tight{
-    margin-top: 2px;
-}
-@media print {
-    body,* {
-        background: white;
-        margin: 0;
-        padding: 0;
-      }
-    .content{width:100%}
+          .nav-link:hover {
+          border-bottom-color: rgba(0,0,0,.05);
+          }
 
-    div.sd {
-         background: yellow;
-        width: 100%;
-        margin: 0px;
-        padding: 0px;
-        height: 100%;
-    }
-    .container{
-        max-width: unset;
-        width:100%;
-    }
+          .nav-link.active {
+          border-bottom-color: #1ee3cf;
+          }
 
-    #printsection
-    {
-        /*background: black;*/
+          section {
+          margin-top: .5rem;
+          }
 
-        /*width:100%;*/
-        margin:0px
-    }
-    .sidebar  ,.justify-between{
-        display:none !important;
-    }
-    .mt-16{margin:0px }
-}
+          .tab {
+          display: none;
+          }
 
-    </style>
-    <div class="roles-permissions">
+          .tab.active {
+          display: block;
+          }
+          </style>
+   <div class="roles-permissions">
         <div class="flex items-center justify-between mb-6">
             <div>
                 <h2 class="text-gray-700 uppercase font-bold">Vouchers</h2>
@@ -70,238 +47,204 @@ hr {
                 </a>
             </div>
         </div>
-         <div id="printsection" class="flex flex-wrap sd w-12/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight bg-white">
-            @foreach ($student as $key=>$value)
-                 <div id="printsection"  class=" w-4/12 px-2 text-sm font-semibold text-gray-600 tracking-tight bg-white" >
-                     <div style="border: 1px solid grey;border-bottom: none;" class="px-2 flex flex-wrap ">
-                         <div class="w-11/12 px-4  text-sm font-semibold text-gray-600 text-center tracking-tight">Bank Copy</div>
-                         <br>
-                         <p class="w-2/12 py-4 text-sm   uppercase text-center tracking-tight bg-white text-center">
-                             <img  src="{{asset('images/school.jpg')}}">
-                         </p>
-                         <p class="w-10/12  py-4 text-sm   uppercase text-center tracking-tight bg-white text-center">
-                             <b>School Management System</b><br>
-                             3956  Church Street,Staten Island<br>
-                             <b>Habib Bank Limited</b><br>
-                             Current A/C No:212-212122-22222<br>
-                             issue-Date:{{$value->date}}
-                         </p>
-                     </div>
-                     <div style="border: 1px solid grey;border-bottom: none;margin-top: 2px;" class="px-2 flex flex-wrap ">
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       <nav>
+           <a href="#" class="nav-link active" data-target="tab-1">Monday</a>
+           <a href="#" class="nav-link " data-target="tab-2">Tuesday</a>
+           <a href="#" class="nav-link " data-target="tab-3">Wednesday</a>
+           <a href="#" class="nav-link " data-target="tab-4">Thursday</a>
+           <a href="#" class="nav-link " data-target="tab-5">Friday</a>
+           <a href="#" class="nav-link " data-target="tab-6">Saturday</a>
+       </nav>
 
-                         <div class="w-2/12 px-1 py-1  text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Name:</b>
-                         </div>
-                         <div class="w-4/12 px-4  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             {{$value->user->name}}
-                         </div>
-                         <div class="w-3/12 px-1 py-1  text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Challan No:</b>
-                         </div>
-                         <div class="w-3/12 px-4  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             SM-00{{$value->id}}
-                         </div>
-                         <div class="w-2/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>  Class:</b>
-                         </div>
-                         <div class="w-2/12 px-4  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             {{$value->class->class_name}}
-                         </div>
-                     </div>
+       <section>
+           <div class="mt-8 bg-white rounded border-b-4 border-gray-300">
+               <div class="flex flex-wrap items-center uppercase text-sm font-semibold bg-gray-300 text-gray-600 rounded-tl rounded-tr">
+                   <div class="w-1/12 px-4 py-3">id</div>
+                   <div class="w-2/12 px-4 py-3"></div>
+                   <div class="w-2/12 px-4 py-3">Email</div>
+                   <div class="w-2/12 px-4 py-3">Class</div>
+                   <div class="w-1/12 px-4 py-3">Payment</div>
+                   <div class="w-2/12 px-4 py-3">Method</div>
+                   <div class="w-2/12 px-4 py-3 text-right">Action</div>
+               </div>
+           </div>
+           @foreach($student as $key=>$value)
 
+           @if($value->date=="Monday")
+                   <div class="tab active" data-tab="tab-1">
+                        <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
+                   <div class="w-1/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->id }}</div>
+                   @foreach($users as $key1=>$value1)
+                       @if($value->teacher->user_id==$value1->id)
+                       <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value1->name ?? '' }}</div>
+                   @endif
+                           @endforeach
+                   <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->start_time ?? '' }}</div>
+                   <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->end_time ?? '' }}</div>
 
-                     <div style="border: 1px solid grey;border-bottom: none;margin-top:1px" class="px-2 flex flex-wrap ">
-                         <div class="w-2/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>No</b>
-                         </div>
-                         <div class="w-6/12 px-1 py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Particulars</b>
-                         </div>
-                         <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white">
-                             <b>Amount</b>
-                         </div>
-                         <div class="w-2/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b> 1</b>
-                         </div>
-                         <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             Tuition Fee
-                         </div>
-                         <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" style="height: 200px;">
-                             {{$value->payment}}
-                         </div>
-                         <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Total Amount</b>
-                         </div>
-                         <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" >
-                             Rs: {{$value->payment}}
+                   <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->class->class_name ?? '' }}</div>
+                    <div class="w-2/12 flex items-center justify-end px-3">
+                       <a href="{{ route('voucher.view',$value->id) }}" class="ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm" title="assign subject">
+                           <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
+                       </a>
+                       @role('Admin')
+                       <a href="{{ route('voucher.edit',$value->id) }}" class="ml-1">
+                           <svg class="h-6 w-6 fill-current text-gray-600" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square" class="svg-inline--fa fa-pen-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"></path></svg>
+                       </a>
+                       <a href="{{ route('voucher.destroy', $value->id) }}" data-url="{!! URL::route('student.destroy', $value->id) !!}" class="deletestudent ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm">
+                           <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                       </a>
+                       @endrole
+                   </div>
+               </div>
+                   </div>
+               @elseif($value->date=="Tuesday")
+                   <div class="tab" data-tab="tab-2">
+                        <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
+                           <div class="w-1/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->id }}</div>
+                           @foreach($users as $key1=>$value1)
+                               @if($value->teacher->user_id==$value1->id)
+                                   <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value1->name ?? '' }}</div>
+                               @endif
+                           @endforeach
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->start_time ?? '' }}</div>
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->end_time ?? '' }}</div>
 
-                         </div>
-                     </div>
-                     <div style="border: 1px solid grey;margin-top:1px" class="px-2 flex flex-wrap ">
-                         <div class="w-8/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white"><br>
-                             <b>Issued By:</b> Online Admin Portal</div>
-                         <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white"><br>
-                             <b>Bank Stamp Sign</b></div><br><br><br>
-                         <div class="w-12/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white"><br>
-                             <b>Note: </b>Keep this fee challan in custody and show it to the account office whenever required.</div>
-                     </div>
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->class->class_name ?? '' }}</div>
+                           <div class="w-2/12 flex items-center justify-end px-3">
+                               <a href="{{ route('voucher.view',$value->id) }}" class="ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm" title="assign subject">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
+                               </a>
+                               @role('Admin')
+                               <a href="{{ route('voucher.edit',$value->id) }}" class="ml-1">
+                                   <svg class="h-6 w-6 fill-current text-gray-600" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square" class="svg-inline--fa fa-pen-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"></path></svg>
+                               </a>
+                               <a href="{{ route('voucher.destroy', $value->id) }}" data-url="{!! URL::route('student.destroy', $value->id) !!}" class="deletestudent ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                               </a>
+                               @endrole
+                           </div>
+                       </div>
+                   </div>
+               @elseif($value->date=="Wednesday")
+                           <div class="tab" data-tab="tab-3">
+                                <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
+                           <div class="w-1/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->id }}</div>
+                           @foreach($users as $key1=>$value1)
+                               @if($value->teacher->user_id==$value1->id)
+                                   <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value1->name ?? '' }}</div>
+                               @endif
+                           @endforeach
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->start_time ?? '' }}</div>
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->end_time ?? '' }}</div>
 
-                 </div>
-                 <div id="printsection"  class=" w-4/12 px-2 text-sm font-semibold text-gray-600 tracking-tight bg-white" >
-                     <div style="border: 1px solid grey;border-bottom: none;" class="px-2 flex flex-wrap ">
-                         <div class="w-11/12 px-4  text-sm font-semibold text-gray-600 text-center tracking-tight">Student Copy</div>
-                         <br>
-                         <p class="w-2/12 py-4 text-sm   uppercase text-center tracking-tight bg-white text-center">
-                             <img  src="{{asset('images/school.jpg')}}">
-                         </p>
-                         <p class="w-10/12  py-4 text-sm   uppercase text-center tracking-tight bg-white text-center">
-                             <b>School Management System</b><br>
-                             3956  Church Street,Staten Island<br>
-                             <b>Habib Bank Limited</b><br>
-                             Current A/C No:212-212122-22222<br>
-                             issue-Date:{{$value->date}}
-                         </p>
-                     </div>
-                     <div style="border: 1px solid black;border-bottom: none;margin-top: 2px" class="px-2 flex flex-wrap ">
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->class->class_name ?? '' }}</div>
+                           <div class="w-2/12 flex items-center justify-end px-3">
+                               <a href="{{ route('voucher.view',$value->id) }}" class="ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm" title="assign subject">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
+                               </a>
+                               @role('Admin')
+                               <a href="{{ route('voucher.edit',$value->id) }}" class="ml-1">
+                                   <svg class="h-6 w-6 fill-current text-gray-600" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square" class="svg-inline--fa fa-pen-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"></path></svg>
+                               </a>
+                               <a href="{{ route('voucher.destroy', $value->id) }}" data-url="{!! URL::route('student.destroy', $value->id) !!}" class="deletestudent ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                               </a>
+                               @endrole
+                           </div>
+                       </div>
+                           </div>
+                       @elseif($value->date=="Thursday")
+                                   <div class="tab" data-tab="tab-4">
+                                        <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
+                           <div class="w-1/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->id }}</div>
+                           @foreach($users as $key1=>$value1)
+                               @if($value->teacher->user_id==$value1->id)
+                                   <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value1->name ?? '' }}</div>
+                               @endif
+                           @endforeach
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->start_time ?? '' }}</div>
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->end_time ?? '' }}</div>
 
-                         <div class="w-2/12 px-1 py-1  text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Name:</b>
-                         </div>
-                         <div class="w-4/12 px-4  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             {{$value->user->name}}
-                         </div>
-                         <div class="w-3/12 px-1 py-1  text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Challan No:</b>
-                         </div>
-                         <div class="w-3/12 px-4  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             SM-00{{$value->id}}
-                         </div>
-                         <div class="w-2/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>  Class:</b>
-                         </div>
-                         <div class="w-2/12 px-4  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             {{$value->class->class_name}}
-                         </div>
-                     </div>
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->class->class_name ?? '' }}</div>
+                           <div class="w-2/12 flex items-center justify-end px-3">
+                               <a href="{{ route('voucher.view',$value->id) }}" class="ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm" title="assign subject">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
+                               </a>
+                               @role('Admin')
+                               <a href="{{ route('voucher.edit',$value->id) }}" class="ml-1">
+                                   <svg class="h-6 w-6 fill-current text-gray-600" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square" class="svg-inline--fa fa-pen-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"></path></svg>
+                               </a>
+                               <a href="{{ route('voucher.destroy', $value->id) }}" data-url="{!! URL::route('student.destroy', $value->id) !!}" class="deletestudent ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                               </a>
+                               @endrole
+                           </div>
+                       </div>
+                                   </div>
+                               @elseif($value->date=="Friday")
+                                           <div class="tab" data-tab="tab-5">
+                                                <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
+                           <div class="w-1/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->id }}</div>
+                           @foreach($users as $key1=>$value1)
+                               @if($value->teacher->user_id==$value1->id)
+                                   <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value1->name ?? '' }}</div>
+                               @endif
+                           @endforeach
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->start_time ?? '' }}</div>
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->end_time ?? '' }}</div>
 
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->class->class_name ?? '' }}</div>
+                           <div class="w-2/12 flex items-center justify-end px-3">
+                               <a href="{{ route('voucher.view',$value->id) }}" class="ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm" title="assign subject">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
+                               </a>
+                               @role('Admin')
+                               <a href="{{ route('voucher.edit',$value->id) }}" class="ml-1">
+                                   <svg class="h-6 w-6 fill-current text-gray-600" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square" class="svg-inline--fa fa-pen-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"></path></svg>
+                               </a>
+                               <a href="{{ route('voucher.destroy', $value->id) }}" data-url="{!! URL::route('student.destroy', $value->id) !!}" class="deletestudent ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                               </a>
+                               @endrole
+                           </div>
+                       </div>
+                                           </div>
+                                       @elseif($value->date=="Saturday")
+                                                   <div class="tab" data-tab="tab-6">
+                                                        <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
+                           <div class="w-1/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->id }}</div>
+                           @foreach($users as $key1=>$value1)
+                               @if($value->teacher->user_id==$value1->id)
+                                   <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value1->name ?? '' }}</div>
+                               @endif
+                           @endforeach
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->start_time ?? '' }}</div>
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->end_time ?? '' }}</div>
 
-                     <div style="border: 1px solid grey;border-bottom: none;" class="px-2 flex flex-wrap ">
-                         <div class="w-2/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>No</b>
-                         </div>
-                         <div class="w-6/12 px-1 py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Particulars</b>
-                         </div>
-                         <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white">
-                             <b>Amount</b>
-                         </div>
-                         <div class="w-2/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b> 1</b>
-                         </div>
-                         <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             Tuition Fee
-                         </div>
-                         <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" style="height: 200px;">
-                             {{$value->payment}}
-                         </div>
-                         <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Total Amount</b>
-                         </div>
-                         <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" >
-                           Rs: {{$value->payment}}
+                           <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->class->class_name ?? '' }}</div>
+                           <div class="w-2/12 flex items-center justify-end px-3">
+                               <a href="{{ route('voucher.view',$value->id) }}" class="ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm" title="assign subject">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
+                               </a>
+                               @role('Admin')
+                               <a href="{{ route('voucher.edit',$value->id) }}" class="ml-1">
+                                   <svg class="h-6 w-6 fill-current text-gray-600" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square" class="svg-inline--fa fa-pen-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"></path></svg>
+                               </a>
+                               <a href="{{ route('voucher.destroy', $value->id) }}" data-url="{!! URL::route('student.destroy', $value->id) !!}" class="deletestudent ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm">
+                                   <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                               </a>
+                               @endrole
+                           </div>
+                       </div>
+                                                   </div>
+               @endif
 
-                         </div>
-                     </div>
-                     <div style="border: 1px solid grey;margin-top:1px" class="px-2 flex flex-wrap ">
-                         <div class="w-8/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white"><br>
-                             <b>Issued By:</b> Online Admin Portal</div>
-                         <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white"><br>
-                             <b>Bank Stamp Sign</b></div><br><br><br>
-                         <div class="w-12/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white"><br>
-                             <b>Note: </b>Keep this fee challan in custody and show it to the account office whenever required.</div>
-                     </div>
+           @endforeach
+       </section>
 
-                 </div>
-                 <div id="printsection"  class=" w-4/12 px-2 text-sm font-semibold text-gray-600 tracking-tight bg-white" >
-                     <div style="border: 1px solid grey;border-bottom: none;" class="px-2 flex flex-wrap ">
-                         <div class="w-11/12 px-4  text-sm font-semibold text-gray-600 text-center tracking-tight">School Copy</div>
-                         <br>
-                         <p class="w-2/12 py-4 text-sm   uppercase text-center tracking-tight bg-white text-center">
-                             <img  src="{{asset('images/school.jpg')}}">
-                         </p>
-                         <p class="w-10/12  py-4 text-sm   uppercase text-center tracking-tight bg-white text-center">
-                             <b>School Management System</b><br>
-                             3956  Church Street,Staten Island<br>
-                             <b>Habib Bank Limited</b><br>
-                             Current A/C No:212-212122-22222<br>
-                             issue-Date:{{$value->date}}
-                         </p>
-                     </div>
-                     <div style="border: 1px solid grey;border-bottom: none;margin-top: 2px" class="px-2 flex flex-wrap ">
-
-                         <div class="w-2/12 px-1 py-1  text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Name:</b>
-                         </div>
-                         <div class="w-4/12 px-4  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             {{$value->user->name}}
-                         </div>
-                         <div class="w-3/12 px-1 py-1  text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Challan No:</b>
-                         </div>
-                         <div class="w-3/12 px-4  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             SM-00{{$value->id}}
-                         </div>
-                         <div class="w-2/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>  Class:</b>
-                         </div>
-                         <div class="w-2/12 px-4  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             {{$value->class->class_name}}
-                         </div>
-                     </div>
-
-
-                     <div style="border: 1px solid grey;border-bottom: none;" class="px-2 flex flex-wrap ">
-                         <div class="w-2/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>No</b>
-                         </div>
-                         <div class="w-6/12 px-1 py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Particulars</b>
-                         </div>
-                         <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white">
-                             <b>Amount</b>
-                         </div>
-                         <div class="w-2/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b> 1</b>
-                         </div>
-                         <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             Tuition Fee
-                         </div>
-                         <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" style="height: 200px;">
-                             {{$value->payment}}
-                         </div>
-                         <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
-                             <b>Total Amount</b>
-                         </div>
-                         <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" >
-                             Rs: {{$value->payment}}
-
-                         </div>
-                     </div>
-                     <div style="border: 1px solid grey;margin-top:1px" class="px-2 flex flex-wrap ">
-                         <div class="w-8/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white"><br>
-                             <b>Issued By:</b> Online Admin Portal</div>
-                         <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white"><br>
-                             <b>Bank Stamp Sign</b></div><br><br><br>
-                         <div class="w-12/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white"><br>
-                             <b>Note: </b>Keep this fee challan in custody and show it to the account office whenever required.</div>
-                     </div>
-
-                 </div>
-          @endforeach
-        </div>
-
-
- @endsection
+        @endsection
 
 @push('scripts')
 <script>
@@ -318,5 +261,13 @@ hr {
             $( "#deletemodal" ).toggleClass( "hidden" );
         })
     })
+    $('.nav-link').on('click', function(e) {
+        e.preventDefault();
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+        $('.tab').removeClass('active');
+        var tabID = $(this).attr('data-target');
+        $('.tab[data-tab="' + tabID + '"]').addClass('active');
+    });
 </script>
 @endpush

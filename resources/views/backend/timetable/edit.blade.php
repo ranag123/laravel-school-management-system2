@@ -150,7 +150,13 @@
     <script>
         $(document).ready(function () {
         $(function() {
-            $( "#datepicker-se" ).datepicker({ dateFormat: 'yy-mm-dd' });
+            $( "#datepicker-se" ).datepicker(
+                {
+                    beforeShowDay: function(date) {
+                        var day = date.getDay();
+                        return [(day != 0 && day != 6),  ''];
+                    }
+                });
         })
 
         })
