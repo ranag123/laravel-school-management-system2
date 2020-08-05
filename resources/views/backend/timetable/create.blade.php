@@ -4,15 +4,21 @@
     <div class="roles-permissions">
         <div class="flex items-center justify-between mb-6">
             <div>
-                <h2 class="text-gray-700 uppercase font-bold">Add Voucher</h2>
+                <h2 class="text-gray-700 uppercase font-bold">Timetable</h2>
             </div>
 
          </div>
         <div class="table w-full mt-8 bg-white rounded">
-            <form action="{{route('timetable.timetableaddrequest')}}" method="POST" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
-               @csrf
-                 <h2 class="text-gray-700 uppercase font-bold">Inovice Information</h2>
+            <form   method="POST" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
+                 <label class=" alert alert-success block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                    @if(session()->has('res'))
+                        <div class="alert alert-success">
+                            {{ session()->get('res') }}
+                        </div>
+                    @endif
+                </label>
                 <br>
+                @csrf
                 <div class="md:flex md:items-center mb-6">
                          <label class=" alert alert-success block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                             @if(session()->has('res'))
@@ -29,7 +35,7 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <select name="class_id" id="class" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" >
+                        <select name="class_id" id="class" required class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" >
                             <option value="" disabled selected>--Select--</option>
                             @foreach($class as $key=>$value)
                           <option value="{{$value['id']}}">{{$value['class_name']}}</option>
@@ -44,7 +50,7 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <select name="subject_id" id="subject" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" >
+                        <select name="subject_id" required id="subject" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" >
                             <option value="" disabled selected>--Select--</option>
                             @foreach($subject as $key1=>$value1)
                                 <option value="{{$value1['id']}}" data-value="{{$value1['teacher_id']}}">{{$value1['name']}}</option>
@@ -74,7 +80,7 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <select name="date"  autocomplete="off" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"  >
+                        <select name="date" required  autocomplete="off" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"  >
                         <option value="Monday">Monday</option>
                         <option value="Tuesday">Tuesday</option>
                         <option value="Wednesday">Wednesday</option>
@@ -92,7 +98,7 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="start_time" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="time">
+                        <input name="start_time" required class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="time">
                     </div>
                 </div>
                 <div class="md:flex md:items-center mb-6">
@@ -102,14 +108,14 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="end_time" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="time">
+                        <input name="end_time" required class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="time">
                     </div>
                 </div>
                 <div class="md:flex md:items-center">
                     <div class="md:w-1/3"></div>
                     <div class="md:w-2/3">
                         <button class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
-                            Create Voucher
+                            Add Timetable
                         </button>
                     </div>
                 </div>
@@ -161,4 +167,26 @@
             })
         })
     </script>
+    <script>
+        $('form').submit(function(event){
+            event.preventDefault();
+
+            var data = new  FormData($(this)[0]);
+            $.ajax({
+                url: "{{route('timetable.timetableaddrequest')}}",
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function(data){
+                     if(data!='success')
+                    {
+                        alert(data);
+                    }
+
+                }
+        })
+        })
+
+                </script>
  @endpush

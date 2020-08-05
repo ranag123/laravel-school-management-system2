@@ -58,14 +58,15 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
 
     Route::post('getteacher', 'TimetableController@getteacher');
 
-    Route::get('timetable', 'TimetableController@index')->name('timetable.index');
     Route::get('timetable/create', 'TimetableController@create')->name( 'timetable.create');
     Route::post('timetableaddrequest', 'TimetableController@timetableaddrequest')->name( 'timetable.timetableaddrequest');
      Route::get('timetable/destroy/{id}', 'TimetableController@destroy')->name('timetable.destroy');
-    Route::get('timetable/edit/{id}', 'VoucherController@edit')->name('timetable.edit');
-    Route::post('timetable/voucherupdaterequest', 'VoucherController@voucherupdaterequest')->name('timetable.voucherupdaterequest');
+    Route::get('timetable/edit/{id}', 'TimetableController@edit')->name('timetable.edit');
+    Route::post('timetable/timetableupdaterequest', 'TimetableController@timetableupdaterequest')->name('timetable.timetableupdaterequest');
 
 });
+Route::get('timetable', 'TimetableController@index')->name('timetable.index');
+
 Route::get('voucher', 'VoucherController@index')->name('voucher.index');
 Route::get('voucher/view/{id}', 'VoucherController@view')->name('voucher.view');
 
