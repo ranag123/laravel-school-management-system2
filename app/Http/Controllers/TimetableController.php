@@ -20,11 +20,6 @@ class TimetableController extends Controller
 {
     public function index()
     {
-        $student = array();
-//        $user = Auth::user();
-//        if ($user->hasRole('Student')) {
-////            $student = Voucher::with('class')->with('user')->with('students')->where('user_id','=',$user->id)->get();
-//        }
         $class = Grade::latest()->get();
         return view('backend.timetable.index',compact('class'));
     }
@@ -55,12 +50,23 @@ class TimetableController extends Controller
             ->where('id','=',$request['id'])->get()->toArray();
         echo json_encode($student);
     }
-
+    public function destroy(Request $request)
+    {
+        $user = Timetable::findOrFail($request->id);
+        $user->delete();
+        return back();
+    }
     public function view($id)
     {
-         $student = Timetable::with('class')->with('teacher')->where('class_id', '=', $id)
+         $student = Timetable::with('class')->with('teacher')->with('subjects')->where('class_id', '=', $id)
               ->get() ;
         $users = User::all();
-      return view('backend.timetable.view', compact('student','users'   ));
+         return view('backend.timetable.view', compact('student','users'   ));
     }
+    public function edit($id)
+    {
+        $class = Grade::latest()->get()->toArray();
+        $subject = Subject::latest()->get()->toArray();
+    }
+
 }

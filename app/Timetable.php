@@ -15,5 +15,8 @@ class Timetable extends Model
     {
         return $this->belongsTo(Teacher::class);
     }
-
+    public function subjects()
+    {
+        return $this->belongsTo(Subject::class,'id');
+    }
 }

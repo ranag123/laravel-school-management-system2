@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::get('timetable', 'TimetableController@index')->name('timetable.index');
     Route::get('timetable/create', 'TimetableController@create')->name( 'timetable.create');
     Route::post('timetableaddrequest', 'TimetableController@timetableaddrequest')->name( 'timetable.timetableaddrequest');
-     Route::get('timetable/destroy/{id}', 'VoucherController@destroy')->name('timetable.destroy');
+     Route::get('timetable/destroy/{id}', 'TimetableController@destroy')->name('timetable.destroy');
     Route::get('timetable/edit/{id}', 'VoucherController@edit')->name('timetable.edit');
     Route::post('timetable/voucherupdaterequest', 'VoucherController@voucherupdaterequest')->name('timetable.voucherupdaterequest');
 
