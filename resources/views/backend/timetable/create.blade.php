@@ -183,6 +183,9 @@
                     {
                         alert(data);
                     }
+                     else{
+                        $('form')[0].reset();
+                    }
 
                 }
         })

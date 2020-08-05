@@ -23,10 +23,6 @@ class TimetableController extends Controller
         {
             $class = Grade::latest()->get()->where('id','=',$user->student->class_id);
         }
-          elseif($user->hasRole('Parent'))
-          {
-              $class = Grade::latest()->get()->where('id','=',$user->student->class_id);
-          }
           elseif($user->hasRole('Teacher'))
           {
               $class = Grade::latest()->get()->where('teacher_id','=',$user->teacher->id);
