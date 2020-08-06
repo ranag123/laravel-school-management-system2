@@ -22,9 +22,18 @@
                 <div class="w-2/12 px-4 py-3">Email</div>
                 <div class="w-2/12 px-4 py-3">Class</div>
                   <div class="w-1/12 px-4 py-3">Payment</div>
-                 <div class="w-2/12 px-4 py-3">Method</div>
+                 <div class="w-1/12 px-4 py-3">Method</div>
+                @role('Student|Parent')
+                <div class="w-1/12 px-4 py-3">Pay Online</div>
+                @endrole
+                <div class="w-1/12 px-4 py-3">Status</div>
+                @role('Admin')
                 <div class="w-2/12 px-4 py-3 text-right">Action</div>
-            </div>
+                    @endrole
+                    @role('Student|Parent')
+                <div class="w-1/12 px-4 py-3 text-right">Action</div>
+                        @endrole
+             </div>
             @foreach ($student as $key=>$value)
               <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
                 <div class="w-1/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->id }}</div>
@@ -32,8 +41,17 @@
                 <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->user->email }}</div>
                 <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->class->class_name ?? '' }}</div>
                  <div class="w-1/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->payment ?? '' }}</div>
-                 <div class="w-2/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->method ?? '' }}</div>
-                 <div class="w-2/12 flex items-center justify-end px-3">
+                 <div class="w-1/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->method ?? '' }}</div>
+                  @role('Student|Parent')
+                  <div class="w-1/12 px-4 py-3"><a onclick="alert('Payment Successfully Submitted');" class="text-xs text-white bg-green-500 px-2 py-1 rounded">Pay</a></div>
+                  @endrole
+                  <div class="w-1/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->status ?? '' }}</div>
+                  @role('Admin')
+                  <div class="w-2/12 flex items-center justify-end px-3">
+                      @endrole
+                      @role('Student|Parent')
+                      <div class="w-1/12 flex items-center justify-end px-3">
+                      @endrole
                     <a href="{{ route('voucher.view',$value->id) }}" class="ml-1 bg-gray-600 block p-1 border border-gray-600 rounded-sm" title="assign subject">
                         <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
                     </a>
