@@ -58,9 +58,18 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
 
     Route::get('timetable/create', 'TimetableController@create')->name( 'timetable.create');
     Route::post('timetableaddrequest', 'TimetableController@timetableaddrequest')->name( 'timetable.timetableaddrequest');
-     Route::get('timetable/destroy/{id}', 'TimetableController@destroy')->name('timetable.destroy');
+    Route::get('timetable/destroy/{id}', 'TimetableController@destroy')->name('timetable.destroy');
     Route::get('timetable/edit/{id}', 'TimetableController@edit')->name('timetable.edit');
     Route::post('timetable/timetableupdaterequest', 'TimetableController@timetableupdaterequest')->name('timetable.timetableupdaterequest');
+
+    Route::get('assessment', 'AssessmentController@index')->name('assessment.index');
+    Route::get('assessment/create/{id}', 'AssessmentController@create')->name('assessment.create');
+    Route::get('assessment/viewassessments/{id}', 'AssessmentController@viewassessments')->name('assessment.viewassessments');
+    Route::get('assessment/assessmentedit/{id}', 'AssessmentController@assessmentedit')->name('assessment.assessmentedit');
+    Route::post('assessment/addassessmentrequest', 'AssessmentController@addassessmentrequest')->name('assessment.addassessmentrequest');
+    Route::post('assessment/updateassessment', 'AssessmentController@updateassessment')->name('assessment.updateassessment');
+
+    Route::get('assessment/assessmentdelete/{id}', 'AssessmentController@assessmentdelete')->name('assessment.assessmentdelete');
 
 });
 Route::get('timetable', 'TimetableController@index')->name('timetable.index');

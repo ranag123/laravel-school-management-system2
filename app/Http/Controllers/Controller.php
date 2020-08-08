@@ -12,7 +12,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function main()
     {
-        return view('home');
+        return view('index');
     }
-
 }
