@@ -68,8 +68,14 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::get('assessment/assessmentedit/{id}', 'AssessmentController@assessmentedit')->name('assessment.assessmentedit');
     Route::post('assessment/addassessmentrequest', 'AssessmentController@addassessmentrequest')->name('assessment.addassessmentrequest');
     Route::post('assessment/updateassessment', 'AssessmentController@updateassessment')->name('assessment.updateassessment');
+    Route::post('assessment/addmarks', 'AssessmentController@addmarks')->name('assessment.addmarks');
+    Route::get('assessment/marks/{id}', 'AssessmentController@marks')->name('assessment.marks');
+    Route::get('assessment/marksassign/{id}', 'AssessmentController@marksassign')->name('assessment.marksassign');
 
     Route::get('assessment/assessmentdelete/{id}', 'AssessmentController@assessmentdelete')->name('assessment.assessmentdelete');
+    Route::get('assessment/deletemarks/{id}', 'AssessmentController@deletemarks')->name('assessment.deletemarks');
+    Route::get('assessment/updatemarks/{id}', 'AssessmentController@updatemarks')->name('assessment.updatemarks');
+    Route::post('assessment/updatemarksrequest', 'AssessmentController@updatemarksrequest')->name('assessment.updatemarksrequest');
 
 });
 Route::get('timetable', 'TimetableController@index')->name('timetable.index');

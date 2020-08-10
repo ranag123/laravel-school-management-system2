@@ -18,22 +18,25 @@ class Student extends Model
         'permanent_address',
     ];
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function parent() 
+    public function parent()
     {
         return $this->belongsTo(Parents::class);
     }
 
-    public function class() 
+    public function class()
     {
         return $this->belongsTo(Grade::class, 'class_id');
     }
 
-    public function attendances() 
+
+
+
+    public function attendances()
     {
         return $this->hasMany(Attendance::class);
     }
