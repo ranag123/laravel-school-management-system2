@@ -33,8 +33,7 @@ class VoucherController extends Controller
         else{
             $student = Voucher::with('class')->with('user')->with('students')->get();
         }
-//        print_r($student);
-        return view('backend.voucher.index',compact('student'));
+         return view('backend.voucher.index',compact('student'));
     }
     public function create()
     {
@@ -55,8 +54,9 @@ class VoucherController extends Controller
             'user_id'          => $request->user_id,
               'date'             => $request->date,
             'amount'       => $request->amount,
-             'payment' => $request->payment,
-            'method' => $request->methods
+//             'payment' => $request->payment,
+            'method' => $request->methods,
+            'status' => $request->status
         ]);
         return redirect()->back()->with('res','Voucher Created Successfully');
     }
@@ -89,13 +89,14 @@ class VoucherController extends Controller
              $student_id         =$request->student_id;
              $date        = $request->date;
             $amount         = $request->amount;
-            $payment         = $request->payment;
+//            $payment         = $request->payment;
              $method         = $request->methods;
             $id         = $request->id;
+            $status         = $request->status;
 
-        DB::update('update vouchers set user_id = ?,class_id=?,student_id=?
- ,date=?,amount=?,payment=?,method=? where id = ?',
-            [$user_id,$class_id,$student_id,$date,$amount,$payment,$method,$id]);
+        DB::update('update vouchers set user_id = ?,class_id=?,student_id=?,status=?
+ ,date=?,amount=?,method=? where id = ?',
+            [$user_id,$class_id,$student_id,$status,$date,$amount,$method,$id]);
         return redirect('voucher');
         }
 

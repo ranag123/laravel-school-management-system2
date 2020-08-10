@@ -127,13 +127,13 @@ hr {
                              Tuition Fee
                          </div>
                          <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" style="height: 200px;">
-                             {{$value->payment}}
+                             {{$value->amount}}
                          </div>
                          <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
                              <b>Total Amount</b>
                          </div>
                          <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" >
-                             Rs: {{$value->payment}}
+                             Rs: {{$value->amount}}
 
                          </div>
                      </div>
@@ -202,13 +202,13 @@ hr {
                              Tuition Fee
                          </div>
                          <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" style="height: 200px;">
-                             {{$value->payment}}
+                             {{$value->amount}}
                          </div>
                          <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
                              <b>Total Amount</b>
                          </div>
                          <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" >
-                           Rs: {{$value->payment}}
+                           Rs: {{$value->amount}}
 
                          </div>
                      </div>
@@ -277,13 +277,13 @@ hr {
                              Tuition Fee
                          </div>
                          <div class="w-4/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" style="height: 200px;">
-                             {{$value->payment}}
+                             {{$value->amount}}
                          </div>
                          <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-left tracking-tight bg-white">
                              <b>Total Amount</b>
                          </div>
                          <div class="w-6/12 px-1  py-1 text-sm font-semibold text-gray-600 text-right tracking-tight bg-white" >
-                             Rs: {{$value->payment}}
+                             Rs: {{$value->amount}}
 
                          </div>
                      </div>

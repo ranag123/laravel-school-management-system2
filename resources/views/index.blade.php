@@ -17,7 +17,7 @@
         </div> <div class="w-2/12 px-4 mr-2 py-3 bg-white text-center">
             <a href="{{route('login')}}" class="text-green-700">
                 <img src="{{asset('images/teacher.jpg')}}">
-                Admin</a>
+                Teacher</a>
         </div>
 
     </div>

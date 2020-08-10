@@ -40,7 +40,7 @@
                 <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->user->name }}</div>
                 <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->user->email }}</div>
                 <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->class->class_name ?? '' }}</div>
-                 <div class="w-1/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->payment ?? '' }}</div>
+                 <div class="w-1/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->amount ?? '' }}</div>
                  <div class="w-1/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->method ?? '' }}</div>
                   @role('Student|Parent')
                   <div class="w-1/12 px-4 py-3"><a onclick="alert('Payment Successfully Submitted');" class="text-xs text-white bg-green-500 px-2 py-1 rounded">Pay</a></div>
