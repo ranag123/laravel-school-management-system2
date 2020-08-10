@@ -8,6 +8,7 @@ use App\Mark;
 use App\Student;
 use App\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AssessmentController extends Controller
@@ -77,8 +78,26 @@ class AssessmentController extends Controller
     }
     public function viewassessments($id)
     {
+        $user=Auth::user();
         $asses = Assessment::where('class_id', '=', $id)->with('subjects')->get()->toArray();
-        return view('backend.assessment.viewassessments', compact('asses','id'));
+        if($user->hasRole('Teacher'))
+        {
+            $a=$asses;
+            $asses=array();
+            foreach ($a as $key=>$value)
+            {
+                if($value['subjects']['teacher_id']==$user->id)
+                {
+                    $asses[]=$value;
+                }
+            }
+            return view('backend.assessment.viewassessments', compact('asses','id'));
+        }
+        else
+        {
+            return view('backend.assessment.viewassessments', compact('asses','id'));
+        }
+
     }
 
     public function assessmentedit($id)

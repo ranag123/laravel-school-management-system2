@@ -62,20 +62,23 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::get('timetable/edit/{id}', 'TimetableController@edit')->name('timetable.edit');
     Route::post('timetable/timetableupdaterequest', 'TimetableController@timetableupdaterequest')->name('timetable.timetableupdaterequest');
 
+
     Route::get('assessment', 'AssessmentController@index')->name('assessment.index');
-    Route::get('assessment/create/{id}', 'AssessmentController@create')->name('assessment.create');
     Route::get('assessment/viewassessments/{id}', 'AssessmentController@viewassessments')->name('assessment.viewassessments');
     Route::get('assessment/assessmentedit/{id}', 'AssessmentController@assessmentedit')->name('assessment.assessmentedit');
-    Route::post('assessment/addassessmentrequest', 'AssessmentController@addassessmentrequest')->name('assessment.addassessmentrequest');
     Route::post('assessment/updateassessment', 'AssessmentController@updateassessment')->name('assessment.updateassessment');
-    Route::post('assessment/addmarks', 'AssessmentController@addmarks')->name('assessment.addmarks');
     Route::get('assessment/marks/{id}', 'AssessmentController@marks')->name('assessment.marks');
-    Route::get('assessment/marksassign/{id}', 'AssessmentController@marksassign')->name('assessment.marksassign');
-
-    Route::get('assessment/assessmentdelete/{id}', 'AssessmentController@assessmentdelete')->name('assessment.assessmentdelete');
-    Route::get('assessment/deletemarks/{id}', 'AssessmentController@deletemarks')->name('assessment.deletemarks');
     Route::get('assessment/updatemarks/{id}', 'AssessmentController@updatemarks')->name('assessment.updatemarks');
     Route::post('assessment/updatemarksrequest', 'AssessmentController@updatemarksrequest')->name('assessment.updatemarksrequest');
+    Route::get('assessment/marksassign/{id}', 'AssessmentController@marksassign')->name('assessment.marksassign');
+    Route::post('assessment/addmarks', 'AssessmentController@addmarks')->name('assessment.addmarks');
+    Route::get('assessment/assessmentdelete/{id}', 'AssessmentController@assessmentdelete')->name('assessment.assessmentdelete');
+    Route::get('assessment/deletemarks/{id}', 'AssessmentController@deletemarks')->name('assessment.deletemarks');
+
+
+    Route::get('assessment/create/{id}', 'AssessmentController@create')->name('assessment.create');
+    Route::post('assessment/addassessmentrequest', 'AssessmentController@addassessmentrequest')->name('assessment.addassessmentrequest');
+
 
 });
 Route::get('timetable', 'TimetableController@index')->name('timetable.index');
@@ -87,6 +90,22 @@ Route::get('timetable/view/{id}', 'TimetableController@view')->name('timetable.v
 
 Route::group(['middleware' => ['auth','role:Teacher']], function ()
 {
+
+    Route::get('assessment', 'AssessmentController@index')->name('assessment.index');
+    Route::get('assessment/viewassessments/{id}', 'AssessmentController@viewassessments')->name('assessment.viewassessments');
+    Route::get('assessment/assessmentedit/{id}', 'AssessmentController@assessmentedit')->name('assessment.assessmentedit');
+    Route::post('assessment/updateassessment', 'AssessmentController@updateassessment')->name('assessment.updateassessment');
+    Route::get('assessment/marks/{id}', 'AssessmentController@marks')->name('assessment.marks');
+    Route::get('assessment/updatemarks/{id}', 'AssessmentController@updatemarks')->name('assessment.updatemarks');
+    Route::post('assessment/updatemarksrequest', 'AssessmentController@updatemarksrequest')->name('assessment.updatemarksrequest');
+    Route::get('assessment/marksassign/{id}', 'AssessmentController@marksassign')->name('assessment.marksassign');
+    Route::post('assessment/addmarks', 'AssessmentController@addmarks')->name('assessment.addmarks');
+    Route::get('assessment/assessmentdelete/{id}', 'AssessmentController@assessmentdelete')->name('assessment.assessmentdelete');
+    Route::get('assessment/deletemarks/{id}', 'AssessmentController@deletemarks')->name('assessment.deletemarks');
+
+
+
+
     Route::post('attendance', 'AttendanceController@store')->name('teacher.attendance.store');
     Route::get('attendance-create/{classid}', 'AttendanceController@createByTeacher')->name('teacher.attendance.create');
 });
