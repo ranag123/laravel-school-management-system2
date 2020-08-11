@@ -63,39 +63,18 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::post('timetable/timetableupdaterequest', 'TimetableController@timetableupdaterequest')->name('timetable.timetableupdaterequest');
 
 
-    Route::get('assessment', 'AssessmentController@index')->name('assessment.index');
-    Route::get('assessment/viewassessments/{id}', 'AssessmentController@viewassessments')->name('assessment.viewassessments');
-    Route::get('assessment/assessmentedit/{id}', 'AssessmentController@assessmentedit')->name('assessment.assessmentedit');
-    Route::post('assessment/updateassessment', 'AssessmentController@updateassessment')->name('assessment.updateassessment');
-    Route::get('assessment/marks/{id}', 'AssessmentController@marks')->name('assessment.marks');
-    Route::get('assessment/updatemarks/{id}', 'AssessmentController@updatemarks')->name('assessment.updatemarks');
-    Route::post('assessment/updatemarksrequest', 'AssessmentController@updatemarksrequest')->name('assessment.updatemarksrequest');
-    Route::get('assessment/marksassign/{id}', 'AssessmentController@marksassign')->name('assessment.marksassign');
-    Route::post('assessment/addmarks', 'AssessmentController@addmarks')->name('assessment.addmarks');
-    Route::get('assessment/assessmentdelete/{id}', 'AssessmentController@assessmentdelete')->name('assessment.assessmentdelete');
-    Route::get('assessment/deletemarks/{id}', 'AssessmentController@deletemarks')->name('assessment.deletemarks');
-
 
     Route::get('assessment/create/{id}', 'AssessmentController@create')->name('assessment.create');
     Route::post('assessment/addassessmentrequest', 'AssessmentController@addassessmentrequest')->name('assessment.addassessmentrequest');
 
 
 });
-Route::get('timetable', 'TimetableController@index')->name('timetable.index');
 
-Route::get('voucher', 'VoucherController@index')->name('voucher.index');
-Route::get('voucher/view/{id}', 'VoucherController@view')->name('voucher.view');
 
-Route::get('timetable/view/{id}', 'TimetableController@view')->name('timetable.view');
+Route::middleware(['role:Admin|Teacher'])->group(function () {
 
-Route::group(['middleware' => ['auth','role:Teacher']], function ()
-{
-
-    Route::get('assessment', 'AssessmentController@index')->name('assessment.index');
-    Route::get('assessment/viewassessments/{id}', 'AssessmentController@viewassessments')->name('assessment.viewassessments');
     Route::get('assessment/assessmentedit/{id}', 'AssessmentController@assessmentedit')->name('assessment.assessmentedit');
     Route::post('assessment/updateassessment', 'AssessmentController@updateassessment')->name('assessment.updateassessment');
-    Route::get('assessment/marks/{id}', 'AssessmentController@marks')->name('assessment.marks');
     Route::get('assessment/updatemarks/{id}', 'AssessmentController@updatemarks')->name('assessment.updatemarks');
     Route::post('assessment/updatemarksrequest', 'AssessmentController@updatemarksrequest')->name('assessment.updatemarksrequest');
     Route::get('assessment/marksassign/{id}', 'AssessmentController@marksassign')->name('assessment.marksassign');
@@ -103,18 +82,47 @@ Route::group(['middleware' => ['auth','role:Teacher']], function ()
     Route::get('assessment/assessmentdelete/{id}', 'AssessmentController@assessmentdelete')->name('assessment.assessmentdelete');
     Route::get('assessment/deletemarks/{id}', 'AssessmentController@deletemarks')->name('assessment.deletemarks');
 
+});
 
 
 
+
+
+Route::get('timetable', 'TimetableController@index')->name('timetable.index');
+
+Route::get('voucher/', 'VoucherController@index')->name('voucher.index');
+Route::get('voucher/view/{id}', 'VoucherController@view')->name('voucher.view');
+Route::get('timetable/view/{id}', 'TimetableController@view')->name('timetable.view');
+Route::get('assessment', 'AssessmentController@index')->name('assessment.index');
+Route::get('assessment/viewassessments/{id?}', 'AssessmentController@viewassessments')->name('assessment.viewassessments');
+Route::get('assessment/marks/{id}', 'AssessmentController@marks')->name('assessment.marks');
+
+
+
+/*
+ * Teacher Routes
+ *
+ * */
+
+Route::group(['middleware' => ['auth','role:Teacher']], function ()
+{
     Route::post('attendance', 'AttendanceController@store')->name('teacher.attendance.store');
     Route::get('attendance-create/{classid}', 'AttendanceController@createByTeacher')->name('teacher.attendance.create');
 });
+
+/*
+ * Parent Routes
+ * */
 
 Route::group(['middleware' => ['auth','role:Parent']], function ()
 {
     Route::get('attendance/{attendance}', 'AttendanceController@show')->name('attendance.show');
 });
 
+/*
+ * Student Route
+ * */
 Route::group(['middleware' => ['auth','role:Student']], function () {
+
 
 });

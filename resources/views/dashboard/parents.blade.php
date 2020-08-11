@@ -47,6 +47,7 @@
                     <div class="mt-6">
                         <a href="{{ route('attendance.show',$children->id) }}" class="bg-gray-100 inline-block mb-4 text-xs text-gray-600 uppercase font-semibold px-4 py-2 border border-gray-400 rounded">Attendence</a>
                         <a href="{{ route('voucher.index') }}" class="bg-gray-100 inline-block mb-4 text-xs text-gray-600 uppercase font-semibold px-4 py-2 border border-gray-400 rounded">Fees</a>
+                        <a href="{{ route('assessment.viewassessments',$children->class->id) }}" class="bg-gray-100 inline-block mb-4 text-xs text-gray-600 uppercase font-semibold px-4 py-2 border border-gray-400 rounded">Assessments</a>
                     </div>
                 </div>
             </div>

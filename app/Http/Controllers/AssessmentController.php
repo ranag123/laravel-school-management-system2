@@ -28,7 +28,14 @@ class AssessmentController extends Controller
     }
     public function marks($id)
     {
-         $asses = Mark::where('assessment_id', '=', $id)->with('User')->get()->toArray();
+        $user=Auth::user();
+        if($user->hasRole('Student'))
+        {
+         $asses = Mark::where('assessment_id', '=', $id)->where('student_id','=',$user->id)->with('User')->get()->toArray();
+        }
+        else{
+            $asses = Mark::where('assessment_id', '=', $id)->with('User')->get()->toArray();
+        }
          return view('backend.assessment.assignmarks',compact('id','asses'));
     }
     public function marksassign($id)
@@ -76,12 +83,12 @@ class AssessmentController extends Controller
             'total' => $request->total
         ]);
     }
-    public function viewassessments($id)
+    public function viewassessments($id=0)
     {
         $user=Auth::user();
-        $asses = Assessment::where('class_id', '=', $id)->with('subjects')->get()->toArray();
         if($user->hasRole('Teacher'))
         {
+            $asses = Assessment::where('class_id', '=', $id)->with('subjects')->get()->toArray();
             $a=$asses;
             $asses=array();
             foreach ($a as $key=>$value)
@@ -93,8 +100,18 @@ class AssessmentController extends Controller
             }
             return view('backend.assessment.viewassessments', compact('asses','id'));
         }
+        elseif($user->hasRole('Student'))
+        {
+            $asses = array();
+            $getuserinfo=Student::where('user_id', '=', $user->id)->get()->toArray();
+            if(isset($getuserinfo[0])) {
+                $asses = Assessment::where('class_id', '=', $getuserinfo[0]['class_id'])->with('subjects')->get()->toArray();
+            }
+            return view('backend.assessment.viewassessments', compact('asses','id'));
+        }
         else
         {
+            $asses = Assessment::where('class_id', '=', $id)->with('subjects')->get()->toArray();
             return view('backend.assessment.viewassessments', compact('asses','id'));
         }
 
