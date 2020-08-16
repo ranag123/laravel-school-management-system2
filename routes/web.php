@@ -64,8 +64,6 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
 
 
 
-    Route::get('assessment/create/{id}', 'AssessmentController@create')->name('assessment.create');
-    Route::post('assessment/addassessmentrequest', 'AssessmentController@addassessmentrequest')->name('assessment.addassessmentrequest');
 
 
 });
@@ -81,6 +79,8 @@ Route::middleware(['role:Admin|Teacher'])->group(function () {
     Route::post('assessment/addmarks', 'AssessmentController@addmarks')->name('assessment.addmarks');
     Route::get('assessment/assessmentdelete/{id}', 'AssessmentController@assessmentdelete')->name('assessment.assessmentdelete');
     Route::get('assessment/deletemarks/{id}', 'AssessmentController@deletemarks')->name('assessment.deletemarks');
+    Route::get('assessment/create/{id}', 'AssessmentController@create')->name('assessment.create');
+    Route::post('assessment/addassessmentrequest', 'AssessmentController@addassessmentrequest')->name('assessment.addassessmentrequest');
 
 });
 
