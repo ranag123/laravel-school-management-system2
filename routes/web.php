@@ -62,6 +62,13 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::get('timetable/edit/{id}', 'TimetableController@edit')->name('timetable.edit');
     Route::post('timetable/timetableupdaterequest', 'TimetableController@timetableupdaterequest')->name('timetable.timetableupdaterequest');
 
+    Route::get('chairity', 'Chairitycontroller@index')->name('chairity.index');
+    Route::get('chairity/create', 'Chairitycontroller@create')->name('chairity.create');
+    Route::post('chairity/chairityaddrequest', 'Chairitycontroller@chairityaddrequest')->name('chairity.chairityaddrequest');
+    Route::get('chairity/destroy/{id}', 'Chairitycontroller@destroy')->name('chairity.destroy');
+    Route::get('chairity/edit/{id}', 'Chairitycontroller@edit')->name('chairity.edit');
+    Route::post('chairity/chairityupdaterequest', 'Chairitycontroller@chairityupdaterequest')->name('chairity.chairityupdaterequest');
+
 
 
 
