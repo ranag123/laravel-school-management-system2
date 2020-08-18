@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
 
 
 });
-Route::get('assessment/report/{id}', 'AssessmentController@report')->name('assessment.report');
+Route::get('assessment/report/{id?}', 'AssessmentController@report')->name('assessment.report');
 
 
 

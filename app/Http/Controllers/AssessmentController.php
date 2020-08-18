@@ -155,10 +155,17 @@ class AssessmentController extends Controller
          $user->delete();
          return back();
      }
-     public function report($id)
+     public function report($id=0)
      {
          $teacher=array();
+         $user=Auth::user();
+         if($user->hasRole('Student'))
+         {
+           $students = Student::where('user_id', '=', $user->id)->with('user')->latest()->get()->toArray();
+          }
+         else {
          $students = Student::where('id', '=', $id)->with('user')->latest()->get()->toArray();
+         }
          $subject = Subject::latest()->get()->toArray();
            $asses = Assessment::with('marks')->with('class')->get()->toArray();
            $grade = Grade::with('teacher')->where('id','=',$students[0]['class_id'])->limit(1)->get()->toArray();
@@ -184,7 +191,7 @@ class AssessmentController extends Controller
                  $i++;
              }
           }
-           return view('backend.assessment.reportcard',compact('a','subject','teacher'));
+            return view('backend.assessment.reportcard',compact('a','subject','teacher'));
      }
 
 
