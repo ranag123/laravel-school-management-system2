@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mark;
 use App\User;
 use App\Grade;
 use App\Parents;

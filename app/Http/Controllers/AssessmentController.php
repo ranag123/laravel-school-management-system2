@@ -7,6 +7,8 @@ use App\Grade;
 use App\Mark;
 use App\Student;
 use App\Subject;
+use App\User;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -153,5 +155,48 @@ class AssessmentController extends Controller
          $user->delete();
          return back();
      }
+     public function report($id)
+     {
+         $teacher=array();
+         $students = Student::where('id', '=', $id)->with('user')->latest()->get()->toArray();
+         $subject = Subject::latest()->get()->toArray();
+           $asses = Assessment::with('marks')->with('class')->get()->toArray();
+           $grade = Grade::with('teacher')->where('id','=',$students[0]['class_id'])->limit(1)->get()->toArray();
+          if(isset($grade[0])) {
+              $teacher = User::where('id', '=', $grade[0]['teacher']['user_id'])->get()->toArray();
+              $teacher = $teacher[0];
+          }
+         $sum = $totalsum = 0;
+          $a=array();
+           $i=0;
+          foreach ($asses as $key=>$value) {
+
+             foreach ($subject as $key2=>$value2)
+             {
+                 if($value2['id']==$value['subject_id'])
+                 {
+                     $sum=$sum+$value['total'];
+                     $b[]=$sum;
+                 }
+             }
+
+             foreach ($value['marks'] as $key1 => $value1) {
+                     if ($value1['student_id'] == $students[0]['user']['id']) {
+                         $value1['total']=$value['total'];
+                         $value1['name']=$value['name'];
+                         $value1['studentname']=$students[0]['user']['name'];
+                         $value1['subject_id']=$value['subject_id'];
+                         $value1['class_name']=$value['class']['class_name'];
+                         $value1['class_numeric']=$value['class']['class_numeric'];
+                           $a[] = $value1 ;
+                     }
+                 $i++;
+             }
+          }
+//          print_r($teacher);
+           return view('backend.assessment.reportcard',compact('a','subject','teacher'));
+     }
+
+
 
 }

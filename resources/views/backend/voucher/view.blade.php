@@ -3,22 +3,10 @@
 @section('content')
     <style>
 
-hr {
-    border: 1px solid grey;border-bottom: none;
-    box-sizing: content-box;
-    height: 0px;
-    overflow: visible;
-    width: 100%;
-    margin: 20px;
-}  p{
-       font-size: 12px !important;
-    line-height: 1.5;
-   }
-@page {
-    /*size: A4;*/
 
-    background: darkcyan;
-    size: landscape;
+@page {
+
+     size: portrait;
     margin: 0px;
  }
 .tracking-tight{
@@ -33,8 +21,7 @@ hr {
     .content{width:100%}
 
     div.sd {
-         background: yellow;
-        width: 100%;
+         width: 100%;
         margin: 0px;
         padding: 0px;
         height: 100%;
