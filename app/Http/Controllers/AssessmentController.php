@@ -169,18 +169,9 @@ class AssessmentController extends Controller
          $sum = $totalsum = 0;
           $a=array();
            $i=0;
+
           foreach ($asses as $key=>$value) {
-
-             foreach ($subject as $key2=>$value2)
-             {
-                 if($value2['id']==$value['subject_id'])
-                 {
-                     $sum=$sum+$value['total'];
-                     $b[]=$sum;
-                 }
-             }
-
-             foreach ($value['marks'] as $key1 => $value1) {
+                foreach ($value['marks'] as $key1 => $value1) {
                      if ($value1['student_id'] == $students[0]['user']['id']) {
                          $value1['total']=$value['total'];
                          $value1['name']=$value['name'];
@@ -193,7 +184,6 @@ class AssessmentController extends Controller
                  $i++;
              }
           }
-//          print_r($teacher);
            return view('backend.assessment.reportcard',compact('a','subject','teacher'));
      }
 
