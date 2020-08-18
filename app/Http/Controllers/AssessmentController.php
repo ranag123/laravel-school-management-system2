@@ -7,6 +7,7 @@ use App\Grade;
 use App\Mark;
 use App\Student;
 use App\Subject;
+use App\Teacher;
 use App\User;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
@@ -93,9 +94,10 @@ class AssessmentController extends Controller
             $asses = Assessment::where('class_id', '=', $id)->with('subjects')->get()->toArray();
             $a=$asses;
             $asses=array();
+            $teach=Teacher::where('user_id','=',$user->id)->get()->toArray();
             foreach ($a as $key=>$value)
             {
-                if($value['subjects']['teacher_id']==$user->id)
+                if($value['subjects']['teacher_id']==$teach[0]['id'])
                 {
                     $asses[]=$value;
                 }
