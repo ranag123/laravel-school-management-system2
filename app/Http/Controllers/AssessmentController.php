@@ -109,8 +109,10 @@ class AssessmentController extends Controller
             $asses = array();
             $getuserinfo=Student::where('user_id', '=', $user->id)->get()->toArray();
             if(isset($getuserinfo[0])) {
-                $asses = Assessment::where('class_id', '=', $getuserinfo[0]['class_id'])->with('subjects')->get()->toArray();
+                $asses = Assessment::where('class_id', '=', $getuserinfo[0]['class_id'])->with('subjects')->with('marks')->get()->toArray();
             }
+//            echo "<pre>";
+//            print_r($asses);
             return view('backend.assessment.viewassessments', compact('asses','id'));
         }
         else

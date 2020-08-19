@@ -12,8 +12,13 @@ class PtmController extends Controller
     public function index()
     {
         $user=Auth::user();
-        $getdata=Ptm::where('parent_id','=',$user->id)->get();
-        return view('backend.ptm.index',compact('getdata'));
+        if($user->hasRole('Parent')) {
+            $getdata = Ptm::where('parent_id', '=', $user->id)->get();
+        }
+        else {
+            $getdata = Ptm::get();
+        }
+            return view('backend.ptm.index',compact('getdata'));
     }
 
     public function show()
@@ -60,9 +65,10 @@ class PtmController extends Controller
 
         $id       = $request->id;
         $date     = $request->date;
+        $status     = $request->status;
         $time     = $request->time;
-        DB::update('update ptms set date = ?,time=? where id = ?',
-            [$time,$date,$id]);
+        DB::update('update ptms set date = ?,time=?,status=? where id = ?',
+            [$time,$date,$status,$id]);
         return redirect('ptm');
 
     }

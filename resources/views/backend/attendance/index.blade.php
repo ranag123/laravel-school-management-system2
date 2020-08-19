@@ -28,7 +28,7 @@
                             <input name="type" class="mr-2 leading-tight" type="radio" value="class" checked>
                             <span class="text-sm">Class</span>
                         </label>
-                        <label class="ml-4 block text-gray-600 font-bold">
+                        <label class="ml-4 block text-gray-600 font-bold" style="display: none">
                             <input name="type" class="mr-2 leading-tight" type="radio" value="teacher" disabled>
                             <span class="text-sm">Teacher</span>
                         </label>
@@ -86,7 +86,7 @@
                         @endforeach
                     </div>
                 @endforeach
-            </div>   
+            </div>
         </div>
 
     </div>

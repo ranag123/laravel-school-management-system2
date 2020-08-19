@@ -43,8 +43,10 @@
                  <div class="w-1/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->amount ?? '' }}</div>
                  <div class="w-1/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->method ?? '' }}</div>
                   @role('Student|Parent')
+                  @if( $value->status =="Unpaid" )
                   <div class="w-1/12 px-4 py-3"><a onclick="alert('Payment Successfully Submitted');" class="text-xs text-white bg-green-500 px-2 py-1 rounded">Pay</a></div>
-                  @endrole
+                  @endif
+                      @endrole
                   <div class="w-1/12 px-4 py-2 text-sm font-semibold text-gray-600 tracking-tight">{{ $value->status ?? '' }}</div>
                   @role('Admin')
                   <div class="w-2/12 flex items-center justify-end px-3">
