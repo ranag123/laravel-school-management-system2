@@ -74,11 +74,21 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
 
 
 });
-Route::get('assessment/report/{id?}', 'AssessmentController@report')->name('assessment.report');
+    Route::get('assessment/report/{id?}', 'AssessmentController@report')->name('assessment.report');
 
 
+    Route::middleware(['role:Admin|Parent'])->group(function () {
+    Route::get('ptm', 'PtmController@index')->name('ptm.index');
+    Route::get('ptm/show', 'PtmController@show')->name('ptm.show');
+    Route::post('ptm/ptmaddrequest', 'PtmController@ptmaddrequest')->name('ptm.ptmaddrequest');
+    Route::get('ptm/destroy/{id}', 'PtmController@destroy')->name('ptm.destroy');
+    Route::get('ptm/edit/{id}', 'PtmController@edit')->name('ptm.edit');
+    Route::post('ptm/updateptm', 'PtmController@updateptm')->name('ptm.updateptm');
 
-Route::middleware(['role:Admin|Teacher'])->group(function () {
+    });
+
+
+    Route::middleware(['role:Admin|Teacher'])->group(function () {
 
     Route::get('assessment/assessmentedit/{id}', 'AssessmentController@assessmentedit')->name('assessment.assessmentedit');
     Route::post('assessment/updateassessment', 'AssessmentController@updateassessment')->name('assessment.updateassessment');
@@ -91,7 +101,7 @@ Route::middleware(['role:Admin|Teacher'])->group(function () {
     Route::get('assessment/create/{id}', 'AssessmentController@create')->name('assessment.create');
     Route::post('assessment/addassessmentrequest', 'AssessmentController@addassessmentrequest')->name('assessment.addassessmentrequest');
 
-});
+    });
 
 
 
