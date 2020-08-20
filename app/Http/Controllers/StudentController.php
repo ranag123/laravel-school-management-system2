@@ -7,7 +7,9 @@ use App\User;
 use App\Grade;
 use App\Parents;
 use App\Student;
+use App\Voucher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
@@ -177,7 +179,9 @@ class StudentController extends Controller
         $user->student()->delete();
         $user->removeRole('Student');
 
-        if ($user->delete()) {
+        DB::table('vouchers')->where('user_id', $student->user_id)->delete();
+
+         if ($user->delete()) {
             if($user->profile_picture != 'avatar.png') {
                 $image_path = public_path() . '/images/profile/' . $user->profile_picture;
                 if (is_file($image_path) && file_exists($image_path)) {
@@ -186,6 +190,6 @@ class StudentController extends Controller
             }
         }
 
-        return back();
+      return back();
     }
 }

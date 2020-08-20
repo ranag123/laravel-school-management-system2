@@ -52,7 +52,7 @@ class VoucherController extends Controller
             'class_id'         => $request->class_id,
             'student_id'          => $request->student_id,
             'user_id'          => $request->user_id,
-              'date'             => $request->date,
+            'date'             => $request->date,
             'amount'       => $request->amount,
 //             'payment' => $request->payment,
             'method' => $request->methods,
