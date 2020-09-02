@@ -26,7 +26,7 @@ class ChairityController extends Controller
             'name' => $request->name,
             'amount' => $request->amount
         ]);
-        return redirect('chairity/index');
+        return redirect('chairity');
     }
 
 

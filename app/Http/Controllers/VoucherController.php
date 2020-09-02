@@ -58,7 +58,7 @@ class VoucherController extends Controller
             'method' => $request->methods,
             'status' => $request->status
         ]);
-        return redirect()->back()->with('res','Voucher Created Successfully');
+        return redirect('voucher');
     }
     public function view($id)
     {
