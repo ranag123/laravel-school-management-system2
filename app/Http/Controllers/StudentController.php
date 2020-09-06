@@ -33,9 +33,10 @@ class StudentController extends Controller
      */
     public function create()
     {
+        $last_row=DB::table('students')->orderBy('id', 'DESC')->first();
         $classes = Grade::latest()->get();
         $parents = Parents::with('user')->latest()->get();
-        return view('backend.students.create', compact('classes','parents'));
+        return view('backend.students.create', compact('classes','parents','last_row'));
     }
 
     /**

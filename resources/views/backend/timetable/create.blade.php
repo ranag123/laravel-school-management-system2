@@ -98,7 +98,9 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="start_time" required class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="time">
+                        <input name="start_time" id="start_time" max="14:00" min="8:00" required class="bg-gray-200 appearance-none
+                        border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700
+                        leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="time">
                     </div>
                 </div>
                 <div class="md:flex md:items-center mb-6">
@@ -108,7 +110,7 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="end_time" required class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="time">
+                        <input name="end_time" id="end_time" min="8:00" max="14:00"  required class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="time">
                     </div>
                 </div>
                 <div class="md:flex md:items-center">
@@ -140,8 +142,7 @@
             url:'{{url('getteacher')}}',
             data:{id:a},
             success:function(msg){
-           console.log(msg);
-            var obj=JSON.parse(msg);
+             var obj=JSON.parse(msg);
             for(var i=0;i<obj.length;i++)
             {
                 $('<option>').val(obj[i].id).text(obj[i].user.name).attr('data-attr', obj[i].user_id).appendTo('#teacherlist');
@@ -190,6 +191,23 @@
                 }
         })
         })
+        function addMinutes(timeString, addMinutes) {
+            if (!timeString.match(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/))
+                return null;
+            var timeSplit = timeString.split(':');
+            var hours = parseInt(timeSplit[0]);
+            var minutes = parseInt(timeSplit[1]) + parseInt(addMinutes);
+            hours += Math.floor(minutes / 60);
+            while (hours >= 24) {
+                hours -= 24;
+            }
+            minutes = minutes % 60;
+            return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
+        }
+        $('#start_time').focusout(function (){
+           var     a=$('#start_time').val();
+            $('#end_time').val(addMinutes(a,45));
 
+                    })
                 </script>
  @endpush

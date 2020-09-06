@@ -62,13 +62,13 @@ class PtmController extends Controller
 
     public function updateptm(Request $request)
     {
-
+        print_r($_POST);
         $id       = $request->id;
         $date     = $request->date;
         $status     = $request->status;
         $time     = $request->time;
         DB::update('update ptms set date = ?,time=?,status=? where id = ?',
-            [$time,$date,$status,$id]);
+            [$date,$time,$status,$id]);
         return redirect('ptm');
 
     }

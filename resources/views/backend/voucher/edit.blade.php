@@ -97,8 +97,8 @@
                     <div class="md:w-2/3">
                         <select name="methods" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" >
                         <option value="Cash" @if($student->method=="Cash") selected @endif>Cash</option>
-                        <option value="Cheque" @if($student->method=="Cheque") selected @endif>Cheque</option>
-                        <option value="Card" @if($student->method=="Card") selected @endif>Card</option>
+                        <option value="Cheque" @if($student->method=="Jazz Cash") selected @endif>Jazz Cash</option>
+                        <option value="Card" @if($student->method=="Mobi Cash") selected @endif>Mobi Cash</option>
                         </select>
                     </div>
                 </div>
