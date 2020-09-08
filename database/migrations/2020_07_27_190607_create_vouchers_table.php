@@ -22,7 +22,7 @@ class CreateVouchersTable extends Migration
 //            $table->text('description')->nullable();
             $table->string('date')->nullable();
             $table->string('payment')->nullable();
-//            $table->string('status')->nullable();
+            $table->string('status')->nullable();
             $table->string('method')->nullable();
             $table->string('amount')->nullable();
             $table->timestamps();

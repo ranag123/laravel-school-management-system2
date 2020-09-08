@@ -58,7 +58,7 @@
                     </div>
                 </div>
 
-                        <input name="roll_number"  type="hidden" value="{{$last_row->id}}" value="{{ old('roll_number') }}">
+                        <input name="roll_number"  type="hidden" value="{{$last_row->id+1}}" value="{{ old('roll_number') }}">
                         @error('roll_number')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror

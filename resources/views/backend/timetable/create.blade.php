@@ -185,6 +185,7 @@
                         alert(data);
                     }
                      else{
+                         window.location.href = "{{url("/timetable")}}";
                         $('form')[0].reset();
                     }
 
