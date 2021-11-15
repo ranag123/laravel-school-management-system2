@@ -29,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $user = Auth::user();
         
         if ($user->hasRole('Admin')) {
